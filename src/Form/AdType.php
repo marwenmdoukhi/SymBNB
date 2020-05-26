@@ -13,22 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdType extends AbstractType
+class AdType extends ApplicationType
 {
-    /**
-     * permet d'voir la configration global
-     * @param $label
-     * @param $placeholder
-     * @return array
-     */
-    private function getConfigration($label,$placeholder,$options=[]){
-        return array_merge(
-        [
-        'label'=>$label,
-                'attr'=>[
-            'placeholder'=>$placeholder
-        ]],$options);
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

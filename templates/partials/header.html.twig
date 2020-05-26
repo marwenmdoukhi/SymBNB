@@ -14,14 +14,29 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="#" class="nav-link">Mon Compte !</a>
+
+            <li class="nav-item dropdown">
+                {% if app.user %}
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
+                    <img src="{{ app.user.picture }}" class="avatar avatar-mini" alt="{{ app.user.fullName }}"> {{ app.user.fullName }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="accountDropdownLink">
+                    <a class="dropdown-item" href="{{ path('ads_create') }}">Créer Annonces</a>
+
+                    <a class="dropdown-item" href="{{ path('account_index') }}">Mon Compte</a>
+                    <a class="dropdown-item" href="{{ path('account_profil') }}">Modifer mon profil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('account_logout') }}">Deconnxion</a>
+
+                </div>
             </li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ path('account_login') }}" class="nav-link"> Connexion</a> </li>
+                    <li class="nav-item"><a href="{{ path('account_register') }}" class="nav-link">Inscription</a> </li>
+                {% endif %}
+
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
     </div>
 </nav>
 {% for label, messages in app.flashes %}
