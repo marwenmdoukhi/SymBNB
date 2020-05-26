@@ -9,6 +9,7 @@ use App\Form\PasswordUpdateType;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,6 +76,7 @@ class AccountController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @return Response
+     *  @IsGranted("ROLE_USER")
      */
     public function Profile(Request $request,EntityManagerInterface $manager){
         $user =$this->getUser();
@@ -95,6 +97,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/account/password-update",name="account_password")
+     * @IsGranted("ROLE_USER")
      */
     public function updatePassword(Request $request,UserPasswordEncoderInterface $encoder,EntityManagerInterface $manager){
 
@@ -144,6 +147,7 @@ class AccountController extends AbstractController
 
     /**
      *  @Route("/account", name="account_index")
+     *  @IsGranted("ROLE_USER")
      */
     public function myAccount(){
 
